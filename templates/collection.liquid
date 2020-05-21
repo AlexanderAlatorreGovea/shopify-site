@@ -1,0 +1,34 @@
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+
+<!-- {% section 'collection-template' %} -->
+
+<!-- THIS IS TO BE COMENTED OUT BECAUSE THIS IS FROM THE COURSE -->
+{% paginate collection.products by 5 %}
+  {% for product in collection.products %}
+    <!--show product details here -->
+  {% endfor %}
+  {% for product in collection.products %}
+    <div>
+      <a href="{{ product.url | within: collection }}">
+        {{ product.price | money }}
+        {{ product.title }}
+        {% if product.available  %} 
+          <br><strong>sold out</strong>
+        {% endif %}
+      </a>
+      <a href="{{ product.url | within: collection }}">
+        <img 
+          src="{{ product.featured_image.src | img_url: 'large' }}"
+          alt="{{ product.featured_image }}"
+        >
+      </a>
+    </div>
+    {% else %}
+      <p>no matches</p>
+  {% endfor %}
+  {% if paginate.pages > 1 %}
+    {{ paginate | default_pagination }}
+  {% endif %}
+{% endpaginate %}

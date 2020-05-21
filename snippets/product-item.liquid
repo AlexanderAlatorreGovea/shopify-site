@@ -1,0 +1,17 @@
+{% for product in collection.products %}
+    <div>
+      <a href="{{ product.url | within: collection }}">
+        {{ product.price | money }}
+        {{ product.title }}
+        {% if product.available  %} <br><strong>sold out</strong>{% endif %}
+      </a>
+      <a href="{{ product.url | within: collection }}">
+        <img 
+          src="{{ product.featured_image.src | img_url: 'large' }}"
+          alt="{{ product.featured_image }}"
+        >
+      </a>
+    </div>
+    {% else %}
+      <p>no matches</p>
+  {% endfor %}

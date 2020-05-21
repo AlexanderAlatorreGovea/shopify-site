@@ -1,0 +1,55 @@
+
+<div class="page-width">
+    {% if section.settings.title != blank %}
+        <div class="section-header text-center">
+        <h2>{{ section.settings.title | escape }}</h2>
+        </div>
+    {% endif %}
+</div> 
+
+{% for member in section.blocks %}
+    <div>
+        <h3>
+            <span>
+
+            </span>
+        </h3>
+    </div>
+{% endfor %}
+
+{% schema %}
+{
+    "name": "Team Members",
+    "class": "team-members-section",
+    "settings": [
+        {
+            "id": "title",
+            "type": "text",
+            "label": "Section Title"
+        }
+    ],
+    "blocks":[
+        {
+            "name": "Team Member",
+            "type": "staff-profile",
+            "settings": [
+                {
+                    "id": "staff-member",
+                    "type": "text",
+                    "label": "Job Title"
+                },
+                {
+                    "id": "staff-title",
+                    "type": "text",
+                    "label": "Job Title"
+                },
+                {
+                    "id": "staff-bio",
+                    "type": "text",
+                    "label": "Job Title"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %} 
