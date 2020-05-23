@@ -1,5 +1,22 @@
 <div>
     test page
 </div>
+ 
+{% for product in collections.cases-20-or-less.products limit: 4 %}
+    <div>
+        <a href="{{ product.url | within: collection }}"> {{ product.title }} </a>
+        {{ product.price | money }}
+    </div>
+        {% unless product.available %}
+            <br><strong>sold out</strong>
+        {% endunless %}
+        <a href="{{ product.url | within: collection }}">
+            <img 
+                src="{{ product.featured_image.src | img_url: 'large' }}" 
+                alt="{{ product.featured_image.alt | escape }}"
+            >
+        </a>
+    <h2> {{ product.title }} </h2>
+{% endfor %}
 
 {% section 'pricing' %}

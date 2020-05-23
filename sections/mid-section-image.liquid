@@ -1,0 +1,93 @@
+<section 
+    id="horizontal-sale"  
+    style="background-size: cover; height: 600px; width: 100%; background-position: center center;"
+>
+    <div class="overlay">
+        <span class="percent-number">{{section.settings.title}}%</span>
+        <span class="title">
+            {{section.settings.sub_title}}
+        </span>
+        <a href="#">
+            View
+        </a>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Mid Section", 
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "id": "title",
+                "type": "text",
+                "label": "Title",
+                "default": "80"
+            }, 
+            {
+                "id": "sub_title",
+                "type": "text",
+                "label": "Sub Title",
+                "default": "Off Sale"
+            }
+        ]
+    }
+{% endschema %}
+
+{% style %}
+    #horizontal-sale {
+        background: url("{{ section.settings.image | img_url: 'large' }}");
+        color: red;
+        border: red;
+    }
+
+    #horizontal-sale .overlay {
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, .5);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    #horizontal-sale .overlay .percent-number {
+        color: white;
+        font-size: 20rem;
+        font-weight: 900;
+        line-height: 1;
+    }
+
+
+
+    #horizontal-sale .overlay .title {
+        color: white;
+        font-size: 3rem;
+        letter-spacing: 20px;
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+
+    #horizontal-sale .overlay a {
+        display: block;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        padding: 15px 60px;
+        border: 2px solid white;
+        text-decoration: none;
+        transition: all .3s ease-in-out;
+    }
+
+    #horizontal-sale .overlay a:hover {
+        color: black;
+        background: #ffff00;
+    }
+{% endstyle %}

@@ -1,0 +1,205 @@
+<section id="two-collections"> 
+    <div class="row">  
+        <div class="col-md-6 left-c"> 
+            <div class="left-c-img">
+                <div class="overlay"></div>
+                <img src="{{ section.settings.left_image | img_url: 'large' }}" >
+            </div>
+            <span class="collection-title">
+                <span> 
+                    {% assign collection_name = section.settings.left_title | split: ", " %}
+                    {{ collection_name[0] }}
+                        <br>
+                    {{ collection_name[1] }}
+                </span>
+            </span>  
+        </div>
+        <div class="col-md-6 right-c">
+            <div class="right-c-bg">
+                <div class="right-c-img">
+                    <img src="{{ section.settings.right_image | img_url: 'large' }}" >
+                    <span class="collection-title">
+                        <span>
+                        {{ section.settings.right_title }}
+                        <!-- Trending -->
+                        </span>
+                    </span>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %} 
+{  
+    "name": "Subsection", 
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "left_image",
+            "label": "Left Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "right_image",
+            "label": "Right Image"
+        },
+        {
+            "id": "left_title",
+            "type": "text",
+            "label": "Left Title"
+        }, 
+        {
+            "id": "right_title",
+            "type": "text",
+            "label": "Right Title"
+        }
+    ],
+    "blocks": [
+    {
+        "type": "tier",
+        "name": "Tier",
+        "limit": 4,
+        "settings": [
+          {
+            "id": "tier_name",
+            "type": "text",
+            "label": "Tier Name",
+            "default": "Free"
+          },
+          {
+            "id": "tier_price",
+            "type": "text",
+            "label": "Tier Price",
+            "default": "0"
+          },
+          {
+            "id": "tier_date",
+            "type": "select",
+            "label": "Tier Date",
+            "options": [
+                {
+                    "value": "dy",
+                    "label": "Daily"
+                },
+                {
+                    "value": "mo",
+                    "label": "Monthly"
+                },
+                {
+                    "value": "yr",
+                    "label": "Yearly"
+                }
+            ],
+            "default": "mo"
+          },
+          {
+            "id": "tier_description",
+            "type": "textarea",
+            "label": "Tier Description",
+            "info": "Separate by a coma",
+            "default": "10 users included, 2 GB of storage, Email support, Help center access",
+            "placeholder": "example a, example b, example c"
+          },
+          {
+            "id": "tier_button_text",
+            "type": "text",
+            "label": "Button Text",
+            "default": "Sign Up"
+          },
+          {
+            "id": "tier_button_link",
+            "type": "text",
+            "label": "Tier Button URL",
+            "default": "#"
+          }
+        ]
+      }
+  ]
+}
+{% endschema %}
+
+{% style %}
+    #two-collections { 
+        margin-bottom: 25px;
+    }
+
+    #two-collections .left-c{ 
+        
+    }
+
+    #two-collections .left-c .left-c-img{ 
+        width: 100%;
+        position: relative;
+    }
+
+    #two-collections .left-c .left-c-img .overlay{ 
+        position: absolute;
+        width: 100%;
+        background: rgba(255, 255, 000, .5);
+        height: 100%;
+    }
+
+    #two-collections .left-c .left-c-img img{ 
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    #two-collections .left-c .collection-title{ 
+        display: flex;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        align-items: flex-end;
+        flex-direction: column;
+        justify-content: center;
+        /* transform: translate3d(-100px, 0, 0); */
+        font-size: 3.3rem;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    #two-collections .left-c .collection-title span{  
+        transform: translate3d(-100px, 50px, 0);
+        line-height: 4rem;
+    }
+
+    #two-collections .right-c {  
+        background-color: #dddfe4;
+    }
+
+    #two-collections .right-c .right-c-bg {  
+        height: 500px;
+        background-color: #dddfe4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #two-collections .right-c .right-c-bg .right-c-img {  
+        height: 300px;
+        width: 300px;
+    }
+
+    #two-collections .right-c .right-c-bg .right-c-img img {  
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    #two-collections .right-c .right-c-bg .right-c-img .collection-title span {  
+        font-size: 3.5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: white;
+        transform: translate3d(-68px, -100px, 0);
+        display: block;
+    }
+{% endstyle %}
+
+
+

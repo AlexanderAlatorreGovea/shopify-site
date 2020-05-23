@@ -1,0 +1,122 @@
+<section id="products-group">
+    <h2>{{ section.settings.title }}</h2>
+    <div class="container">
+        <div class="row">
+            {% for block in section.blocks %}
+                <div class="col-md-3"> 
+                    <a class="product-bg">
+                        <img src=" {{ block.settings.image | img_url: 'large' }} " class="product-image" alt="">
+                        <div class="overlay">
+                            <span class="product-title"> {{ block.settings.inner_title }} </span>
+                            <span class="product-price">${{ block.settings.tier_price }}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Top Products",
+    "class": "section-pricing",
+    "tag": "section",
+    "settings": [
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Title",
+        "default": "Top Products"
+      }
+    ],
+    "blocks": [
+      {
+          "type": "products",
+          "name": "Products",
+          "limit": 8,
+          "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+              "id": "inner_title",
+              "type": "text",
+              "label": "Inner Title",
+              "default": "Obey Propaganda Shirt"
+            },
+            {
+              "id": "tier_price",
+              "type": "text",
+              "label": "Tier Price",
+              "default": "25"
+            }
+          ]
+        }
+    ]
+}
+{% endschema %}
+
+{% style %}
+
+#products-group {
+    padding: 50px 0 0 0;
+}
+
+#products-group div[class*="col"] {
+    margin-bottom: 50px;
+}
+
+#products-group h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#products-group .product-bg {
+    background-color: white;
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+#products-group .product-bg .product-image {
+    width: 80%;
+}
+
+#products-group .product-bg .overlay {
+    background-color: rgba(255, 255, 000, .5);
+    /* background-color: #ffff00; */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all .2s ease-in-out;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#products-group .product-bg .overlay:hover {
+    opacity: 1;
+}
+
+#products-group .product-bg .overlay .product-title {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+#products-group .product-bg .overlay .product-price {
+    font-weight: 600;
+}
+
+{% endstyle %}

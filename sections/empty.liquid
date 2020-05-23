@@ -1,0 +1,269 @@
+<section id="jumbo">
+    <div class="bg-image"></div>
+    <div class="transparent-color"></div>
+        <div class="titles">
+            <h1> {{ section.settings.title }} </h1>
+            <h2>{{ section.settings.sub_title }} </h2> 
+        </div> 
+    <div class="state">
+        {% for block in section.blocks %}
+            <span class="number">
+                {{ block.settings.number }} 
+            </span>
+        {% endfor %}
+    </div>
+    <div class="store-info"> 
+        {% for block in section.blocks %}
+            <img src="{{ block.settings.product | img_url: 'large' }}" />
+        {% endfor %}
+    </div>
+</section>    
+   
+ 
+{% schema %}
+{
+    "name": "Image", 
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "id": "title",
+            "type": "text",
+            "label": "Title",
+            "default": "OFF WHITE"
+        }, 
+        {
+            "id": "sub_title",
+            "type": "text",
+            "label": "Sub Title",
+            "default": "NEW COLLECTION"
+        }
+    ],
+    "blocks": [
+        {
+        "type": "image",
+        "name": "Product Image",
+        "limit": 4,
+            "settings": [
+                {
+                    "id": "product",
+                    "type": "image_picker",
+                    "label": "Product Image"
+                }
+            ]
+        },
+        { 
+            "type": "number",
+            "name": "Number",
+            "settings": [
+                {
+                    "id": "number",
+                    "type": "text",
+                    "label": "Number",
+                    "default": "01"
+                }
+            ]
+        },
+        { 
+            "type": "left_section",
+            "name": "Left Section",
+            "limit": 1,
+            "settings": [
+                {
+                    "id": "left_image",
+                    "type": "image_picker",
+                    "label": "Image"
+                },
+                {
+                    "id": "left_text",
+                    "type": "text",
+                    "label": "Left Text",
+                    "default": "Summer Collection"
+                }
+            ]
+        },
+        { 
+            "type": "right_section",
+            "name": "Right Section",
+            "limit": 1,
+            "settings": [
+                {
+                    "id": "right_image",
+                    "type": "image_picker",
+                    "label": "Image"
+                },
+                {
+                    "id": "right_text",
+                    "type": "text",
+                    "label": "Right Text",
+                    "default": "Trending"
+                }
+            ]
+        }
+  ]
+}
+{% endschema %}
+
+{% style %}
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,700;1,600&display=swap');
+
+    *{
+        box-sizing: border-box;
+    }
+    html, body {
+        font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+        background-color: #f4f7fd;
+    }
+
+    header {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 80px;
+        padding: 0 10%;
+        z-index: 10;
+    }
+
+    header .menu {
+        display: flex;
+    }
+
+    header .logo a {
+        font-weight: 600;
+        text-decoration: none;
+        color: white;
+        text-transform: uppercase;
+        font-size: 2rem;
+    }
+
+    header .menu a {
+        display: inline-block;
+        font-weight: 400;
+        padding: 0 20px;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: white;
+    } 
+
+    header .menu .link{
+        padding: 20px;
+    }
+
+    header .menu .dropdown {
+        position: relative;
+    } 
+
+    header .menu .dropdown:hover .sub-menu, header .menu .dropdown .sub-menu:hover{
+        display: block;
+    } 
+
+    header .menu .dropdown .sub-menu{
+        display: none;
+        background: white;
+        padding: 20px;
+        position: absolute;
+        color: red;
+        transform: translate3d(0, 10px, 0);
+        min-width: 150px;
+        border-radius: 3px;
+    } 
+
+    header .menu .dropdown .sub-menu a{
+        color: black;
+        display: block;
+        padding: 10px;
+    }
+
+    #jumbo {
+        background: black;
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    #jumbo .bg-image {
+        background: url("{{ section.settings.image | img_url: 'large' }}");
+        background-size: cover;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        z-index: 1;
+        top:  0;
+        position: absolute;
+    } 
+
+    #jumbo .transparent-color {
+        background: rgba(66, 53, 88, .8);
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+        z-index: 3;
+    }
+
+    #jumbo .titles {
+        position: absolute;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    #jumbo .titles h1{
+        font-size: 7rem;
+        color: white;
+        font-weight: 900;
+        text-transform: uppercase;
+        transform: translate3d(100px, 0, 0);
+    }
+
+    #jumbo .titles h2{
+        font-size: 5rem;
+        color: white;
+        font-weight: 200;
+        text-transform: uppercase;
+        transform: translate3d(130px, 0, 0);
+    }
+
+    #jumbo .state {
+        background: white;
+        position: absolute;
+        height: 12%;
+        z-index: 3;
+        width: 100%;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    #jumbo .state .number{
+    font-size: 5rem;
+    transform: translate3d(50px, 0, 0);
+    }
+
+    #jumbo .store-info {
+        background: #0cdbdd;
+        position: absolute;
+        height: 20%;
+        z-index: 3;
+        width: 75%;
+        bottom: 0;
+        right: 0;
+        display: flex;
+    }
+
+    #jumbo .store-info img {
+        height: 100%;
+        width: 25%;
+        object-fit: cover;
+    }
+
+    
+{% endstyle %}
