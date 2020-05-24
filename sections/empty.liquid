@@ -4,18 +4,46 @@
         <div class="titles">
             <h1> {{ section.settings.title }} </h1>
             <h2>{{ section.settings.sub_title }} </h2> 
-        </div> 
+        </div>  
     <div class="state">
         {% for block in section.blocks %}
             <span class="number">
                 {{ block.settings.number }} 
             </span>
         {% endfor %}
-    </div>
+    </div>  
     <div class="store-info"> 
         {% for block in section.blocks %}
-            <img src="{{ block.settings.product | img_url: 'large' }}" />
+            {% if block.settings.video_url != blank %}
+                
+                {% if block.settings.video_url.type == "youtube" %}
+                    <iframe src="//www.youtube.com/embed/{{ block.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+                {% elsif block.settings.video_url.type == "vimeo" %}
+                    <iframe src="//player.vimeo.com/video/{{ block.settings.video_url.id }}?byline=0&portrait=0&badge=0" width="850" allow="autoplay" height="480" frameborder="0" allowfullscreen></iframe>
+                {% else %}
+                    <iframe allowfullscreen="" 
+                        class="bg-video" allow="autoplay" 
+                        frameborder="0" 
+                        src="//player.vimeo.com/video/{{ block.settings.video_url }}?title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1&amp;loop=1"
+                        style="background: white;" 
+                        webkitallowfullscreen=""
+                    >
+                </iframe>
+                {% endif %}
+
+                <!-- <iframe allowfullscreen="" 
+                    class="bg-video" allow="autoplay" 
+                    frameborder="0" 
+                    src="//player.vimeo.com/video/{{ block.settings.video_url }}?title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1&amp;loop=1"
+                    style="background: white;" 
+                    webkitallowfullscreen=""
+                >
+                </iframe> -->
+            {% else %}
+                <img src="{{ block.settings.product | img_url: 'large' }}" />
+                {% endif %}
         {% endfor %}
+        
     </div>
 </section>    
    
@@ -102,6 +130,18 @@
                     "default": "Trending"
                 }
             ]
+        },
+        {
+            "type": "video",
+            "name": "Video Block",
+            "settings": [
+                {
+                    "type": "video_url",
+                    "id": "video_url",
+                    "label": "Video URL",
+                    "accept": ["youtube", "vimeo"]
+                }
+            ]
         }
   ]
 }
@@ -184,19 +224,28 @@
         height: 100vh;
         width: 100%;
         position: relative;
-        margin-bottom: 50px;
+        margin-bottom: 50px; 
     }
 
     #jumbo .bg-image {
         background: url("{{ section.settings.image | img_url: 'large' }}");
         background-size: cover;
-        height: 100%;
+        height:100%;
         background-repeat: no-repeat;
         background-position: center;
         width: 100%;
         z-index: 1;
         top:  0;
         position: absolute;
+    } 
+
+    #jumbo .bg-video {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+        top:  0;
+        transform: scale(1.5) ;
     } 
 
     #jumbo .transparent-color {
