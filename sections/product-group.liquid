@@ -2,7 +2,7 @@
     <h2>{{ section.settings.title }}</h2>
     <div class="container">
         <div class="row">
-            {% for block in section.blocks %}
+            <!-- {% for block in section.blocks %} 
                 <div class="col-md-3"> 
                     <a class="product-bg">
                         <img src=" {{ block.settings.image | img_url: 'large' }} " class="product-image" alt="">
@@ -10,13 +10,25 @@
                             <span class="product-title"> {{ block.settings.inner_title }} </span>
                             <span class="product-price">${{ block.settings.tier_price }}</span>
                         </div>
+                    </a> 
+                </div>
+            {% endfor %} -->
+            {%- assign collection = collections[section.settings.collection] -%}
+            {% for product in collection.products limit: 8 %}
+                <div class="col-md-3"> 
+                    <a class="product-bg" href="{{ product.url | within: collection }}">
+                        <img src="{{ product.featured_image.src | img_url: 'large' }}" class="product-image" alt="">
+                        <div class="overlay">
+                            <span class="product-title"> {{ product.title }} </span>
+                            <span class="product-price">${{ product.price }}</span>
+                        </div>
                     </a>
                 </div>
             {% endfor %}
         </div>
     </div>
 </section>
-
+ 
 {% schema %}
 {
     "name": "Top Products",
@@ -28,6 +40,25 @@
         "type": "text",
         "label": "Title",
         "default": "Top Products"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": {
+          "en": "Collection"
+        }
+      },
+      {
+        "id": "tier_price",
+        "type": "text",
+        "label": "Tier Price",
+        "default": "25"
+      },
+      {
+        "id": "inner_title",
+        "type": "text",
+        "label": "Inner Title",
+        "default": "Obey Propaganda Shirt"
       }
     ],
     "blocks": [

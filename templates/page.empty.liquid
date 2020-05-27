@@ -1,25 +1,31 @@
 <!-- {% section 'empty' %}  -->
  
-<header>
+<header class="header">
     <div class="logo">
-            <a href="#">Store Name</a>
-        </div>
+        <a href="#">{{ shop.name }}</a>
+    </div> 
         <ul class="menu">  
-            <li class="link">
-                <a href="#">About</a>
-            </li>
-            <li class="link dropdown"> 
-                <a  href="#"> 
-                    About
-                </a>
-                <div class="sub-menu">
-                    <a class="sub-link">Link- 1</a>
-                    <a class="sub-link">Link- 2</a>
-                    <a class="sub-link">Link 3</a>
-                </div>
-            </li>
-        </ul> 
-    </header>
+            {% for link in linklists.main-menu.links %}
+                {% assign child_list_handle = link.title | handleize %}
+                {% if linklists[child_list_handle].links == blank %}
+                    <li class="link">
+                        <a href="#">{{ link.title | link_to: link.url }}</a>
+                    </li> 
+                {% else %}
+                    <li class="link dropdown">
+                        <a  href="#">
+                            {{ link.title | link_to: link.url }}
+                        </a>
+                        <div class="sub-menu">
+                            {% for childlink in linklists[child_list_handle].links %}
+                                <a style="cursor: pointer;" class="sub-link" >{{ childlink.title | escape}}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>  
+    </header> 
     {% section 'empty' %}
 
     {% section 'sub-section' %}

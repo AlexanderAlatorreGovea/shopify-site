@@ -31,14 +31,6 @@
                 </iframe>
                 {% endif %}
 
-                <!-- <iframe allowfullscreen="" 
-                    class="bg-video" allow="autoplay" 
-                    frameborder="0" 
-                    src="//player.vimeo.com/video/{{ block.settings.video_url }}?title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1&amp;loop=1"
-                    style="background: white;" 
-                    webkitallowfullscreen=""
-                >
-                </iframe> -->
             {% else %}
                 <img src="{{ block.settings.product | img_url: 'large' }}" />
                 {% endif %}
@@ -158,7 +150,7 @@
         background-color: #f4f7fd;
     }
 
-    header {
+    .header {
         position: fixed;
         display: flex;
         align-items: center;
@@ -169,11 +161,11 @@
         z-index: 10;
     }
 
-    header .menu {
+    .header .menu {
         display: flex;
     }
 
-    header .logo a {
+    .header .logo a {
         font-weight: 600;
         text-decoration: none;
         color: white;
@@ -181,7 +173,7 @@
         font-size: 2rem;
     }
 
-    header .menu a {
+    .header .menu a {
         display: inline-block;
         font-weight: 400;
         padding: 0 20px;
@@ -190,19 +182,19 @@
         color: white;
     } 
 
-    header .menu .link{
+    .header .menu .link{
         padding: 20px;
     }
 
-    header .menu .dropdown {
+    .header .menu .dropdown {
         position: relative;
     } 
 
-    header .menu .dropdown:hover .sub-menu, header .menu .dropdown .sub-menu:hover{
+    .header .menu .dropdown:hover .sub-menu, .header .menu .dropdown .sub-menu:hover{
         display: block;
     } 
 
-    header .menu .dropdown .sub-menu{
+    .header .menu .dropdown .sub-menu{
         display: none;
         background: white;
         padding: 20px;
@@ -213,7 +205,7 @@
         border-radius: 3px;
     } 
 
-    header .menu .dropdown .sub-menu a{
+    .header .menu .dropdown .sub-menu a{
         color: black;
         display: block;
         padding: 10px;
